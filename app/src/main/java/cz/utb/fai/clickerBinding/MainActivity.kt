@@ -17,5 +17,17 @@ class MainActivity : AppCompatActivity() {
             counter++
             binding.counterTextView.text = counter.toString()
         }
+
+        if (savedInstanceState != null) {
+            // Obnovit hodnotu "counter" ze stavu, pokud je dostupný
+            counter = savedInstanceState.getInt("counter", 0)
+            binding.counterTextView.text = counter.toString()
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        // Uložit hodnotu "counter" do stavu před změnou orientace displeje
+        outState.putInt("counter", counter)
+        super.onSaveInstanceState(outState)
     }
 }
